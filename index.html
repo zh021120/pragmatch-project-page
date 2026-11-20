@@ -182,64 +182,100 @@
 <body>
 
 
-  <!-- Scroll to Top Button -->
-  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
-    <i class="fas fa-chevron-up"></i>
-  </button>
+
+<!-- Scroll to Top Button -->
+<button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+  <i class="fas fa-chevron-up"></i>
+</button>
+
 <main id="main-content">
   <section class="hero">
     <div class="hero-body">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <!-- TODO: Replace with your paper title -->
-            <h1 class="title is-1 publication-title">PragMatch: Separating Pragmatic Incongruity from Cross-Modal Mismatch in Large Vision-Language Models</h1>
+
+            <!-- Paper title -->
+            <h1 class="title is-1 publication-title">
+              PragMatch: Separating Pragmatic Incongruity from Cross-Modal Mismatch in Large Vision-Language Models
+            </h1>
+
+            <!-- Authors -->
             <div class="is-size-5 publication-authors">
-              <!-- TODO: Replace with your paper authors and their personal links -->
               <span class="author-block">
-                <a href="#">Zhanna Mukhametsharip</a>,</span>
-                <span class="author-block">
-                  <a href="#">Vera Demberg</a>,</span>
-                  <span class="author-block">
-                    <a href="#">Varsha Suresh</a>
-                  </span>
-                  </div>
+                <strong>Zhanna Mukhametsharip<sup>1</sup></strong>,
+              </span>
+              <span class="author-block">
+                <strong>Vera Demberg<sup>1,2</sup></strong>,
+              </span>
+              <span class="author-block">
+                <strong>Varsha Suresh<sup>2</sup></strong>
+              </span>
+            </div>
 
-                  <div class="is-size-5 publication-authors">
-                    <!-- TODO: Replace with your institution and conference/journal info -->
-                    <span class="author-block">Saarland University<br>arXiv preprint, 2026</span>
-                    <!-- TODO: Remove this line if no equal contribution -->
-                    
-                  </div>
+            <!-- Affiliations and emails -->
+            <div class="is-size-6 publication-authors">
+              <span class="author-block">
+                <sup>1</sup> Saarland University, Germany
+              </span>
+              <br>
+              <span class="author-block">
+                <sup>2</sup> Max Planck Institute for Informatics, Germany
+              </span>
+              <br>
+              <span class="author-block">
+                Saarland Informatics Campus
+              </span>
+              <br>
+              <span class="author-block">
+                <small>
+                  <a href="mailto:zhmu00001@stud.uni-saarland.de">zhmu00001@stud.uni-saarland.de</a>,
+                  <a href="mailto:vera@lst.uni-saarland.de">vera@lst.uni-saarland.de</a>,
+                  <a href="mailto:vsuresh@mpi-inf.mpg.de">vsuresh@mpi-inf.mpg.de</a>
+                </small>
+              </span>
+              <br>
+              <span class="author-block">
+                arXiv preprint, 2026
+              </span>
+            </div>
 
-                  <div class="column has-text-centered">
-                    <div class="publication-links">
-                         <!-- TODO: Update with your arXiv paper ID -->
-                      <span class="link-block">
-                        <a href="https://arxiv.org/pdf/2608.09772" target="_blank"
-                        class="external-link button is-normal is-rounded is-dark">
-                        <span class="icon">
-                          <i class="fas fa-file-pdf"></i>
-                        </span>
-                        <span>Paper</span>
-                      </a>
+            <!-- Publication links -->
+            <div class="column has-text-centered">
+              <div class="publication-links">
+
+                <!-- Paper PDF -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/pdf/2608.09772"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
                     </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
 
-                    <!-- TODO: Add your supplementary material PDF or remove this section -->
-                    <span class="link-block">
-                      <a href="static/pdfs/supplementary_material.pdf" target="_blank"
-                      class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="fas fa-file-pdf"></i>
-                      </span>
-                      <span>Supplementary</span>
-                    </a>
-                  </span>
+                <!-- Supplementary material -->
+                <span class="link-block">
+                  <a href="static/pdfs/supplementary_material.pdf"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Supplementary</span>
+                  </a>
+                </span>
 
-                  <!-- TODO: Replace with your GitHub repository URL -->
-                  <span class="link-block">
-                    <a href="#" target="_blank"
-                    class="external-link button is-normal is-rounded is-dark">
+                <!-- Code repository -->
+                <span class="link-block">
+                  <a href="#"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fab fa-github"></i>
                     </span>
@@ -247,23 +283,29 @@
                   </a>
                 </span>
 
-                <!-- TODO: Update with your arXiv paper ID -->
+                <!-- arXiv -->
                 <span class="link-block">
-                  <a href="https://arxiv.org/abs/2608.09772" target="_blank"
-                  class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
+                  <a href="https://arxiv.org/abs/2608.09772"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+
+              </div>
             </div>
+
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</main>
+
 
 
 <!-- PragMatch teaser figure -->
