@@ -295,6 +295,72 @@ main#main-content .hero {
 @media screen and (max-width: 480px) {
   .publication-links .link-block { display: block; width: 100%; margin: 0; }
 }
+.pm-carousel { position: relative; max-width: 960px; margin: 0 auto; }
+.pm-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  gap: 1rem;
+  padding: 0.5rem 0.25rem 1rem;
+  scrollbar-width: none;
+}
+.pm-track::-webkit-scrollbar { display: none; }
+.pm-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  margin: 0;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(31, 59, 72, 0.08);
+  padding: 1.25rem;
+  text-align: center;
+}
+.pm-slide img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: none;
+}
+.pm-slide figcaption { margin-top: 0.9rem; color: #64748b; font-size: 0.95rem; }
+
+.pm-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 1px solid #dce5e9;
+  background: rgba(255, 255, 255, 0.95);
+  color: #1f3b48;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(31, 59, 72, 0.15);
+  z-index: 2;
+}
+.pm-nav:hover { background: #f0f7f7; }
+.pm-prev { left: -22px; }
+.pm-next { right: -22px; }
+
+.pm-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: 0.25rem; }
+.pm-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: #cbd5e1;
+  cursor: pointer;
+  padding: 0;
+}
+.pm-dot.active { background: #397b86; transform: scale(1.25); }
+
+@media (max-width: 768px) {
+  .pm-prev { left: 4px; }
+  .pm-next { right: 4px; }
+}
 </style>
 <body>
 
@@ -425,10 +491,31 @@ main#main-content .hero {
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <!-- TODO: Add your teaser figure here once the final image is ready. -->
       <h2 class="subtitle has-text-centered">
         PragMatch examines whether large vision-language models distinguish intended pragmatic incongruity from arbitrary image-text mismatch.
       </h2>
+
+      <div class="pm-carousel" id="pm-carousel" aria-roledescription="carousel" aria-label="PragMatch figures">
+        <button class="pm-nav pm-prev" aria-label="Previous figure">&#8249;</button>
+
+        <div class="pm-track" tabindex="0">
+          <figure class="pm-slide">
+            <img src="static/images/pragmatch_fig1.png" alt="PragMatch figure 1">
+            <figcaption>Lexical Cue Injection</figcaption>
+          </figure>
+          <figure class="pm-slide">
+            <img src="static/images/pragmatch_fig2.png" alt="PragMatch figure 2" loading="lazy">
+            <figcaption>Style Cue Injection</figcaption>
+          </figure>
+          <figure class="pm-slide">
+            <img src="static/images/pragmatch_fig3.png" alt="PragMatch figure 3" loading="lazy">
+            <figcaption>OCR Cue Injection</figcaption>
+          </figure>
+        </div>
+
+        <button class="pm-nav pm-next" aria-label="Next figure">&#8250;</button>
+        <div class="pm-dots"></div>
+      </div>
     </div>
   </div>
 </section>
@@ -551,6 +638,45 @@ main#main-content .hero {
 <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
 
     <!-- End of Statcounter Code -->
+<script>
+(function () {
+  var root = document.getElementById('pm-carousel');
+  if (!root) return;
+  var track = root.querySelector('.pm-track');
+  var slides = root.querySelectorAll('.pm-slide');
+  var dotsBox = root.querySelector('.pm-dots');
+  var dots = [];
 
+  slides.forEach(function (_, i) {
+    var d = document.createElement('button');
+    d.className = 'pm-dot';
+    d.setAttribute('aria-label', 'Go to figure ' + (i + 1));
+    d.onclick = function () { go(i); };
+    dotsBox.appendChild(d);
+    dots.push(d);
+  });
+
+  function current() {
+    return Math.round(track.scrollLeft / (slides[0].offsetWidth + 16));
+  }
+  function go(i) {
+    i = Math.max(0, Math.min(slides.length - 1, i));
+    track.scrollTo({ left: i * (slides[0].offsetWidth + 16), behavior: 'smooth' });
+  }
+  function update() {
+    var c = current();
+    dots.forEach(function (d, i) { d.classList.toggle('active', i === c); });
+  }
+
+  root.querySelector('.pm-prev').onclick = function () { go(current() - 1); };
+  root.querySelector('.pm-next').onclick = function () { go(current() + 1); };
+  track.addEventListener('scroll', update, { passive: true });
+  track.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') go(current() + 1);
+    if (e.key === 'ArrowLeft') go(current() - 1);
+  });
+  update();
+})();
+</script>
   </body>
   </html>
