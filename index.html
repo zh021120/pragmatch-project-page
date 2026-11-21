@@ -328,6 +328,24 @@ main#main-content .hero {
 }
 .pm-slide figcaption { margin-top: 0.9rem; color: #64748b; font-size: 0.95rem; }
 
+/* first slide: explains the task */
+.pm-task { display: flex; flex-direction: column; justify-content: center; padding: 2rem 2.5rem; text-align: left; }
+.pm-task h3 { font-size: 1.25rem; font-weight: 700; color: #1e293b; margin-bottom: 0.75rem; }
+.pm-task .pm-question {
+  background: #f0f7f7;
+  border: 1px solid #d8e8e8;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  color: #285f68;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+}
+.pm-modes { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.pm-mode { border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem 1.1rem; background: #f8fafc; }
+.pm-mode strong { display: block; color: #397b86; margin-bottom: 0.35rem; }
+.pm-mode p { margin: 0; color: #475569; font-size: 0.95rem; line-height: 1.5; }
+.pm-task .pm-note { margin-top: 1.1rem; color: #64748b; font-size: 0.92rem; }
+
 .pm-nav {
   position: absolute;
   top: 50%;
@@ -347,19 +365,14 @@ main#main-content .hero {
 .pm-next { right: -22px; }
 
 .pm-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: 0.25rem; }
-.pm-dot {
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  border: none;
-  background: #cbd5e1;
-  cursor: pointer;
-  padding: 0;
-}
+.pm-dot { width: 10px; height: 10px; border-radius: 50%; border: none; background: #cbd5e1; cursor: pointer; padding: 0; }
 .pm-dot.active { background: #397b86; transform: scale(1.25); }
 
 @media (max-width: 768px) {
   .pm-prev { left: 4px; }
   .pm-next { right: 4px; }
+  .pm-modes { grid-template-columns: 1fr; }
+  .pm-task { padding: 1.25rem; }
 }
 </style>
 <body>
@@ -487,39 +500,6 @@ main#main-content .hero {
 
 
 
-<!-- PragMatch teaser figure -->
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <h2 class="subtitle has-text-centered">
-        PragMatch examines whether large vision-language models distinguish intended pragmatic incongruity from arbitrary image-text mismatch.
-      </h2>
-
-      <div class="pm-carousel" id="pm-carousel" aria-roledescription="carousel" aria-label="PragMatch figures">
-        <button class="pm-nav pm-prev" aria-label="Previous figure">&#8249;</button>
-
-        <div class="pm-track" tabindex="0">
-          <figure class="pm-slide">
-            <img src="static/images/pragmatch_fig1.png" alt="PragMatch figure 1">
-            <figcaption>Lexical Cue Injection</figcaption>
-          </figure>
-          <figure class="pm-slide">
-            <img src="static/images/pragmatch_fig2.png" alt="PragMatch figure 2" loading="lazy">
-            <figcaption>Style Cue Injection</figcaption>
-          </figure>
-          <figure class="pm-slide">
-            <img src="static/images/pragmatch_fig3.png" alt="PragMatch figure 3" loading="lazy">
-            <figcaption>OCR Cue Injection</figcaption>
-          </figure>
-        </div>
-
-        <button class="pm-nav pm-next" aria-label="Next figure">&#8250;</button>
-        <div class="pm-dots"></div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End PragMatch teaser figure -->
 
 <!-- Paper abstract -->
 <section class="section hero is-light">
@@ -574,23 +554,63 @@ main#main-content .hero {
 </section>
 <!-- End results -->
 
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Qualitative Examples</h2>
+      <div class="content has-text-centered">
+        <p>
+          Examples of shortcut-induced verdict flips across three cue types: OCR, style, and lexical.
+          In every case the model is asked one yes/no question: is this image–text pair sarcastic?
+        </p>
+      </div>
 
+      <div class="pm-carousel" id="pm-carousel" aria-roledescription="carousel" aria-label="Qualitative examples">
+        <button class="pm-nav pm-prev" aria-label="Previous slide">&#8249;</button>
 
+        <div class="pm-track" tabindex="0">
 
+          <!-- Slide 0: what the model is asked -->
+          <div class="pm-slide pm-task">
+            <h3>What the model is asked</h3>
+            <div class="pm-question">
+              Given this image and its caption, is the image–text pair sarcastic? Answer Yes or No.
+            </div>
+            <div class="pm-modes">
+              <div class="pm-mode">
+                <strong>Zero-shot</strong>
+                <p>The model answers directly with Yes or No.</p>
+              </div>
+              <div class="pm-mode">
+                <strong>Chain-of-thought (CoT)</strong>
+                <p>The model first reasons step by step about the image and caption, then gives its final Yes or No.</p>
+              </div>
+            </div>
+            <!-- TODO: paste your exact zero-shot and CoT prompt wording into the two boxes above if you want it shown verbatim -->
+            <p class="pm-note">The figures that follow show only the final verdict, so a flip means the answer changed from Yes to No or the reverse.</p>
+          </div>
 
+          <figure class="pm-slide">
+            <img src="static/images/pragmatch_fig1.png" alt="Qualitative example 1" loading="lazy">
+            <figcaption>OCR cue</figcaption>
+          </figure>
+          <figure class="pm-slide">
+            <img src="static/images/pragmatch_fig2.png" alt="Qualitative example 2" loading="lazy">
+            <figcaption>Style cue</figcaption>
+          </figure>
+          <figure class="pm-slide">
+            <img src="static/images/pragmatch_fig3.png" alt="Qualitative example 3" loading="lazy">
+            <figcaption>Lexical cue</figcaption>
+          </figure>
 
+        </div>
 
-
-
-
-
-
-
-
-
-
-
-
+        <button class="pm-nav pm-next" aria-label="Next slide">&#8250;</button>
+        <div class="pm-dots"></div>
+      </div>
+    </div>
+  </div>
+</section>
 <!--BibTex citation -->
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
@@ -650,15 +670,13 @@ main#main-content .hero {
   slides.forEach(function (_, i) {
     var d = document.createElement('button');
     d.className = 'pm-dot';
-    d.setAttribute('aria-label', 'Go to figure ' + (i + 1));
+    d.setAttribute('aria-label', 'Go to slide ' + (i + 1));
     d.onclick = function () { go(i); };
     dotsBox.appendChild(d);
     dots.push(d);
   });
 
-  function current() {
-    return Math.round(track.scrollLeft / (slides[0].offsetWidth + 16));
-  }
+  function current() { return Math.round(track.scrollLeft / (slides[0].offsetWidth + 16)); }
   function go(i) {
     i = Math.max(0, Math.min(slides.length - 1, i));
     track.scrollTo({ left: i * (slides[0].offsetWidth + 16), behavior: 'smooth' });
